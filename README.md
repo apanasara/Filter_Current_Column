@@ -20,3 +20,8 @@ If "+" sign is not added into first , then all filters will be wiped & new filte
 ***Demo***
 
 ![How to Use](Reference/Manual.gif)
+
+## Installation
+
+1. Adding macro to a **Personal Macro Workbook**, so that it can be called into any opened Excel Workbook. https://support.office.com/en-us/article/Copy-your-macros-to-a-Personal-Macro-Workbook-AA439B90-F836-4381-97F0-6E4C3F5EE566 
+2. Adding Macro in **Quick Access Toolbar** https://www.howtogeek.com/232620/how-to-add-a-macro-to-the-quick-access-toolbar-in-office/
