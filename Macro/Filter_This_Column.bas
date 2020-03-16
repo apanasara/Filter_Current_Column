@@ -8,7 +8,7 @@ Sub Filter_contains()
     
     On Error Resume Next
     '----------Filters are there in sheet or not?-------------
-    If ActiveSheet.AutoFilterMode = True Or ActiveCell.ListObject.Name = "" Then
+    If Not (ActiveSheet.AutoFilterMode) And ActiveCell.ListObject Is Nothing Then
          MsgBox "Filter-Range is not applied, please apply filters"
          Exit Sub
     End If
@@ -18,14 +18,14 @@ Sub Filter_contains()
     If fltr = "" Or fltr = "+" Then: Exit Sub
     
     '-------In which column filter to be applied?--------------
-    If Not ActiveCell.ListObject Is Nothing Then
+    If Not (ActiveCell.ListObject Is Nothing) Then
         Set FilterRange = ActiveCell.ListObject.HeaderRowRange
     Else
         Set FilterRange = ActiveSheet.AutoFilter.Range
     End If
     
-    ColumnName = Intersect(FilterRange, ActiveCell.EntireColumn).Value
-    col = Application.Match(ColumnName, FilterRange, 0)
+    ColumnName = Intersect(FilterRange.Rows(1), ActiveCell.EntireColumn).Value
+    col = Application.Match(ColumnName, FilterRange.Rows(1), 0)
 
     '------------applying new filter / adding into existing filter?-------
     If Left(fltr, 1) <> "+" Then
@@ -36,7 +36,7 @@ Sub Filter_contains()
     
     
     '--------Finally Applying filter--------
-    If Not ActiveCell.ListObject Is Nothing Then
+    If Not (ActiveCell.ListObject Is Nothing) Then
         ActiveCell.ListObject.Range.AutoFilter _
             Field:=col, _
             Criteria1:="=*" & fltr & "*", Operator:=xlOr, Criteria2:="=" & fltr
